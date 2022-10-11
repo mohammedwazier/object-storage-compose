@@ -46,11 +46,9 @@ services:
     links:
       - minio1
       - minio2
-      - portainer
     depends_on:
       - minio1
       - minio2
-      - portainer
 volumes:
   data1-1:
   data1-2:
