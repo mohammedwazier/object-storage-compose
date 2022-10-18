@@ -9,8 +9,6 @@ events {
     worker_connections  4096;
 }
 
-error_log         logs/error.log info;
-
 http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
