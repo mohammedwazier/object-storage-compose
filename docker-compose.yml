@@ -45,6 +45,7 @@ services:
     expose:
       - 9000
       - 9001
+      - 80
     links:
       - minio1
       - minio2
