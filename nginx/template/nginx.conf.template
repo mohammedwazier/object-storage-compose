@@ -5,8 +5,11 @@ error_log  /var/log/nginx/error.log warn;
 pid        /var/run/nginx.pid;
 
 events {
+    use epoll;
     worker_connections  4096;
 }
+
+error_log         logs/error.log info;
 
 http {
     include       /etc/nginx/mime.types;
@@ -107,4 +110,17 @@ http {
             proxy_pass http://console;
         }
     }
+
+    server {
+        server_name   localhost;
+        listen        [::]:80;
+
+        error_page 500 502 503 504 /50x.html;
+
+        location / {
+            root html;
+        }
+
+    }
+
 }
