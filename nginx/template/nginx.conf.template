@@ -39,6 +39,22 @@ http {
     }
 
     server {
+        listen       80;
+        
+        server_name  localhost;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+
+    server {
         # listen       9000;
         # listen  [::]:9000;
         listen       9000;
@@ -107,18 +123,6 @@ http {
 
             proxy_pass http://console;
         }
-    }
-
-    server {
-        server_name   localhost;
-        listen        [::]:80;
-
-        error_page 500 502 503 504 /50x.html;
-
-        location / {
-            root html;
-        }
-
     }
 
 }
