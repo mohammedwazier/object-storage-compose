@@ -55,10 +55,10 @@ http {
     }
 
     server {
+        listen       80;
+        listen  [::]:80;
         # listen       9000;
         # listen  [::]:9000;
-        listen       9000;
-        listen  [::]:9000;
         server_name  minio-service.${NGINX_HOST} www.minio-service.${NGINX_HOST};
 
         # To allow special characters in headers
@@ -87,10 +87,10 @@ http {
     }
 
     server {
+        listen       80;
+        listen  [::]:80;
         # listen       9001;
         # listen  [::]:9001;
-        listen       9001;
-        listen  [::]:9001;
         server_name  minio.${NGINX_HOST} www.minio.${NGINX_HOST};
 
         # To allow special characters in headers
