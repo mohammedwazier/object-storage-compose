@@ -29,6 +29,15 @@ services:
     volumes:
       - data2-1:/data1
       - data2-2:/data2
+  upload_app:
+    image: mohammedwazier/upload_app:latest
+    restart: always
+    volumes:
+      - app_vol:/app
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
   nginx:
     image: nginx:1.22.0-alpine
     hostname: nginx
@@ -49,11 +58,14 @@ services:
     links:
       - minio1
       - minio2
+      - upload_app
     depends_on:
       - minio1
       - minio2
+      - upload_app
 volumes:
   data1-1:
   data1-2:
   data2-1:
   data2-2:
+  app_vol:

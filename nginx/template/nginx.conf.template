@@ -39,7 +39,7 @@ http {
     }
 
     upstream upload {
-        server localhost:1423;
+        server upload_app:1423;
     }
 
     server {
