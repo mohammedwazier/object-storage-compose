@@ -30,7 +30,7 @@ services:
       - data2-1:/data1
       - data2-2:/data2
   upload_app:
-    image: ghcr.io/mohammedwazier/upload_app:latest
+    image: mohammedwazier/upload_app:latest
     restart: always
     volumes:
       - app_vol:/app
