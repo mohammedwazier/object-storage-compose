@@ -64,10 +64,10 @@ http {
         # listen       9000;
         # listen  [::]:9000;
         server_name minio-service.$ {
-            NGINX_HOS
+            NGINX_HOST
         }
         www.minio-service.$ {
-            NGINX_HOS
+            NGINX_HOST
         }
         ;
 
