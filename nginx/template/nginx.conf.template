@@ -26,21 +26,14 @@ http {
     upstream minio {
         server minio1:9000;
         server minio2:9000;
-        # server minio3:9000;
-        # server minio4:9000;
     }
 
     upstream console {
         ip_hash;
         server minio1:9001;
         server minio2:9001;
-        # server minio3:9001;
-        # server minio4:9001;
     }
 
-    # upstream upload {
-    #     server upload_app:1423;
-    # }
 
     server {
         listen 80;
@@ -131,7 +124,7 @@ http {
         listen [::]:80;
         # listen       9001;
         # listen  [::]:9001;
-        server_name minio.${NGINX_HOST} www.minio.${NGINX_HO};
+        server_name minio.${NGINX_HOST} www.minio.${NGINX_HOST};
 
         # To allow special characters in headers
         ignore_invalid_headers off;
