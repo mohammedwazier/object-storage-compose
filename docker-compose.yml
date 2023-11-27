@@ -59,16 +59,16 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - db
-    db:
-      image: "jc21/mariadb-aria:latest"
-      restart: unless-stopped
-      environment:
-        MYSQL_ROOT_PASSWORD: "npm"
-        MYSQL_DATABASE: "npm"
-        MYSQL_USER: "npm"
-        MYSQL_PASSWORD: "npm"
-      volumes:
-        - mariadb:/var/lib/mysql
+  db:
+    image: "jc21/mariadb-aria:latest"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "npm"
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: "npm"
+      MYSQL_PASSWORD: "npm"
+    volumes:
+      - mariadb:/var/lib/mysql
   # nginx:
   #   image: nginx:1.22.0-alpine
   #   hostname: nginx
