@@ -49,14 +49,26 @@ services:
       # Add any other Stream port you want to expose
     environment:
       # Mysql/Maria connection parameters:
-      DB_MYSQL_HOST: "database.masihkasar.my.id"
+      DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: "root"
-      DB_MYSQL_PASSWORD: "Mohammed21!"
-      DB_MYSQL_NAME: "nginxProxyManager"
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "npm"
+      DB_MYSQL_NAME: "npm"
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+    db:
+      image: "jc21/mariadb-aria:latest"
+      restart: unless-stopped
+      environment:
+        MYSQL_ROOT_PASSWORD: "npm"
+        MYSQL_DATABASE: "npm"
+        MYSQL_USER: "npm"
+        MYSQL_PASSWORD: "npm"
+      volumes:
+        - mariadb:/var/lib/mysql
   # nginx:
   #   image: nginx:1.22.0-alpine
   #   hostname: nginx
@@ -88,3 +100,4 @@ volumes:
   data2-1:
   data2-2:
   app_vol:
+  mariadb:
