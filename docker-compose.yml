@@ -39,30 +39,49 @@ services:
     env_file:
       - .env
   nginx:
-    image: nginx:1.22.0-alpine
-    hostname: nginx
+    image: "jc21/nginx-proxy-manager:latest"
     restart: unless-stopped
-    environment:
-      - NGINX_HOST=${MAIN_HOST}
-      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-    volumes:
-      - ./nginx/template:/etc/nginx/templates
     ports:
-      - 80:80
-      - 9000:9000
-      - 9001:9001
-    expose:
-      - 9000
-      - 9001
-      - 80
-    links:
-      - minio1
-      - minio2
-      - upload_app
-    depends_on:
-      - minio1
-      - minio2
-      - upload_app
+      # These ports are in format <host-port>:<container-port>
+      - 80:80 # Public HTTP Port
+      - 443:443 # Public HTTPS Port
+      - 81:81 # Admin Web Port
+      # Add any other Stream port you want to expose
+    environment:
+      # Mysql/Maria connection parameters:
+      DB_MYSQL_HOST: "database.masihkasar.my.id"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "root"
+      DB_MYSQL_PASSWORD: "Mohammed21!"
+      DB_MYSQL_NAME: "nginxProxyManager"
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+  # nginx:
+  #   image: nginx:1.22.0-alpine
+  #   hostname: nginx
+  #   restart: unless-stopped
+  #   environment:
+  #     - NGINX_HOST=${MAIN_HOST}
+  #     - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+  #   volumes:
+  #     - ./nginx/template:/etc/nginx/templates
+  #   ports:
+  #     - 80:80
+  #     - 9000:9000
+  #     - 9001:9001
+  #   expose:
+  #     - 9000
+  #     - 9001
+  #     - 80
+  #   links:
+  #     - minio1
+  #     - minio2
+  #     - upload_app
+  #   depends_on:
+  #     - minio1
+  #     - minio2
+  #     - upload_app
 volumes:
   data1-1:
   data1-2:
