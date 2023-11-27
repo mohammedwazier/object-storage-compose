@@ -3,6 +3,9 @@ x-minio-common: &minio-common
   image: quay.io/minio/minio:RELEASE.2022-09-17T00-09-45Z
   command: server --console-address ":9001" http://minio{1...2}/data{1...2}
   restart: unless-stopped
+  port:
+    - 9000:9000
+    - 9001:9001
   expose:
     - 9000
     - 9001
